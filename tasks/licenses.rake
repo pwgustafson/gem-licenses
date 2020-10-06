@@ -20,11 +20,11 @@ namespace :gem do
       licenses = Gem.licenses
       total = 0
       CSV.open(filename, 'w') do |csv|
-        csv << %w[name version homepage summary license]
+        csv << ["Component", "Company Product", "License and Version", "Is Product 'distributed'?", "How Used in Product", "Used as is or modified?", "Functionality of OSS component", "Alternate/Replacement Available?"]
         licenses.each do |license, gems|
           total += gems.count
           gems.sort_by(&:name).each do |gem|
-            csv << [gem.name, gem.version, gem.homepage, gem.summary.strip, license]
+            csv << [gem.name, "Cloud CMA", "#{license}-#{gem.version.version}", "No", gem.summary.strip.truncate(50, separator: ' '), "As-Is", gem.summary.strip, "Yes"]
           end
         end
       end
